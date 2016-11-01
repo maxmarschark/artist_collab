@@ -1,0 +1,28 @@
+body {
+  background-color: rgba(11, 25, 38, 0.67);
+}
+
+.searchInput {
+  width: 15rem;
+  height: 3rem;
+  font-size: 25px;
+}
+
+.button {
+  background-color: rgba(52, 73, 94,1);
+  border:1px solid white;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family: 'helvetica', sans-serif;
+  font-size:17px;
+  padding:16px 31px;
+  text-decoration:none;
+}
+
+.Artist {
+  font-size: 25px;
+  color: white;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}

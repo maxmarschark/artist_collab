@@ -7,10 +7,12 @@ export default class App extends React.Component {
     this.state = {
       searchInput: '',
       selectedArtist: {},
+      selectAlbums: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.searchForArtist = this.searchForArtist.bind(this);
+    this.getArtistAlbums = this.getArtistAlbums.bind(this);
   }
 
   handleChange (e) {
@@ -34,7 +36,15 @@ export default class App extends React.Component {
            });
   }
 
-  // 
+  getArtistAlbums() {
+    const query = this.state.selectAlbums.id;
+    request.get(`https://api.spotify.com/v1/albums/${id}/tracks`)
+           .then((response) => {
+             const album = response.body.albums.items[0];
+             const track = album.track;
+             console.log(response);
+           });
+  }
 
   searchForArtist() {
     const query = this.state.searchInput.replace(' ', '%20');
@@ -59,10 +69,10 @@ export default class App extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type='text' name='searchInput' onChange={this.handleChange} />
-          <input type='submit' />
+          <input type='text' name='searchInput' className="searchInput" placeholder="Artist" onChange={this.handleChange} />
+          <input type='submit' className="button" />
         </form>
-        <div>{this.state.selectedArtist.name}</div>
+        <div className="Artist">{this.state.selectedArtist.name}</div>
       </div>
     );
   }
