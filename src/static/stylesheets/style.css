@@ -26,3 +26,9 @@ body {
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
 }
+
+#visualization {
+  margin-top: 1px;
+  width: 98%;
+  height: 550px;
+}
