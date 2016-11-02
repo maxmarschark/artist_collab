@@ -7,7 +7,8 @@ export default class App extends React.Component {
     this.state = {
       searchInput: '',
       selectedArtist: {},
-      selectAlbums: {}
+      selectAlbums: {},
+      artistCounts: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,10 +20,9 @@ export default class App extends React.Component {
 
   handleChange (e) {
     e.preventDefault();
-    const key = e.target.name;
-    const update = {};
-    update[key] = e.target.value;
-    this.setState(update);
+    this.setState({
+      searchInput: e.target.value
+    });
   }
 
   handleSubmit (e) {
@@ -44,14 +44,38 @@ export default class App extends React.Component {
              tracks.body.items.forEach(this.getTrackDetails)
            })
   }
-
+// artistCounts = {
+//   'kanye': 1,
+//   'fetty': 2
+// }
   getTrackDetails(track) {
-    setTimeout(function() {
      request.get(`https://api.spotify.com/v1/tracks/${track.id}`)
       .then((track) => {
-        console.log(track.body.artists)
+        // console.log(track.body.artists);
+        let { artists } = track.body;
+        for(let i = 0; i < artists.length; i++) {
+          let artist = artists[i];
+          let artistName = artist.name;
+
+          console.log(artists[i].name);
+          if (this.state.artistCounts[artistName]) {
+            // pull artist out of artistCounts
+            console.log(artistCounts);
+
+
+            // add 1 to count
+            // put artist back in state with updated count
+            this.state.artistCounts[artistName] += 1;
+          }
+          else {
+            this.setState({
+              artistCounts: {
+                [artistName]: 1
+              }
+            })
+          }
+        }
       })
-    }, 1000)
   }
 
   searchForArtist() {
