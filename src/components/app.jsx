@@ -88,18 +88,23 @@ export default class App extends React.Component {
       });
   };
 
-  //create a function that loops over this.state.artistCounts
-  //each artist return div with artist name & artist count
+  onClick (e) {
+    e.preventDefault();
+    this.artistCounts();
+  }
 
   render () {
+    const img_url = this.state.selectedArtist.img_url;
+    const artistCounts = this.state.selectedArtist.img_url;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type='text' name='searchInput' className="searchInput" placeholder="Artist" onChange={this.handleChange} />
           <input type='submit' className="button" />
         </form>
-        <div className="Artist">{this.state.selectedArtist.name}</div>
+          <img className="artist-img" src={this.state.selectedArtist.img_url} alt="" />
       </div>
+
     );
   }
 }

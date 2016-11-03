@@ -27,6 +27,15 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.artist-img {
+  width: 100px;
+	height: 100px;
+	border-radius: 50px;
+  list-style: none;
+  background-color: transparent !important;
+  align-items: center;
+}
+
 #visualization {
   margin-top: 1px;
   width: 98%;
