@@ -30,10 +30,9 @@ body {
 .artist-img {
   width: 100px;
 	height: 100px;
-	border-radius: 50px;
-  list-style: none;
-  background-color: transparent !important;
-  align-items: center;
+  border-radius: 50px;
+  margin-left: 40%;
+  margin-top: 25%;
 }
 
 #visualization {
