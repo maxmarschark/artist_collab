@@ -1,5 +1,7 @@
 import React from 'react';
 import request from 'superagent';
+import Artist from './getArtistCollabs.jsx';
+
 
 export default class App extends React.Component {
   constructor() {
@@ -16,8 +18,7 @@ export default class App extends React.Component {
     this.getArtistAlbums = this.getArtistAlbums.bind(this);
     this.getArtistAlbumTracks = this.getArtistAlbumTracks.bind(this);
     this.getTrackDetails = this.getTrackDetails.bind(this);
-    this.getArtistCollabs = this.getArtistCollabs.bind(this);
-    this.renderArtists = this.renderArtists.bind(this);
+    this.artistOnClick = this.artistOnClick.bind(this)
   }
 
   handleChange(e) {
@@ -90,39 +91,41 @@ export default class App extends React.Component {
       });
   }
 
-  getArtistCollabs() {
-    console.log('reached get artist collab function');
-    const { artistCounts } = this.state;
-    // console.log(artistCounts);
-    const artist = Object.keys(artistCounts).map((key) => {
-       //kate
-      const i = document.createElement("div");
-      i.innerHTML = key;
-      i.addEventListener('click', () => {
-        this.searchForArtist(key);
-      })
-      document.getElementById("collabs").appendChild(i);
+  getSubsequentCollabs(artist) {
+    this.setState({
+      selectedArtist: {},
+      selectedAlbums: {},
+      artistCounts: {},
     });
+    this.searchForArtist(artist);
   }
-  //kate
-  renderArtists() {
-    console.log("inside render artists");
-    const artists = this.getArtistCollabs();
-    console.log(artists);
+
+  artistOnClick(e) {
+    let artist = e.target.value;
+    this.getSubsequentCollabs(artist);
   }
 
   render() {
     const img_url = this.state.selectedArtist.img_url;
+    const { artistCounts } = this.state;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type='text' name='searchInput' className="searchInput" placeholder="Artist" onChange={this.handleChange} />
           <input type='submit' className="button" />
         </form>
-          <img className="artist-img" src={this.state.selectedArtist.img_url}
-          // kate
-           onClick={this.renderArtists} alt="" />
+          <img className="artist-img" src={this.state.selectedArtist.img_url} />
           <div id="collabs">
+            {
+              Object.keys(artistCounts).map((artist) => {
+                return (
+                  <Artist
+                    name={artist}
+                    artistOnClick={this.artistOnClick}
+                  />
+                )
+              })
+            }
           </div>
       </div>
 
