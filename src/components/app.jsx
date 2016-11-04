@@ -17,6 +17,7 @@ export default class App extends React.Component {
     this.getArtistAlbumTracks = this.getArtistAlbumTracks.bind(this);
     this.getTrackDetails = this.getTrackDetails.bind(this);
     this.getArtistCollabs = this.getArtistCollabs.bind(this);
+    this.renderArtists = this.renderArtists.bind(this);
   }
 
   handleChange(e) {
@@ -28,7 +29,8 @@ export default class App extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.searchForArtist();
+    const query = this.state.searchInput.replace(' ', '%20');
+    this.searchForArtist(query);
   }
 
   getArtistAlbums() {
@@ -65,8 +67,7 @@ export default class App extends React.Component {
       });
   }
 
-  searchForArtist() {
-    const query = this.state.searchInput.replace(' ', '%20');
+  searchForArtist(query) {
     request.get(`https://api.spotify.com/v1/search?q=${query}&type=artist`)
       .then((response) => {
         const artist = response.body.artists.items[0];
@@ -92,12 +93,22 @@ export default class App extends React.Component {
   getArtistCollabs() {
     console.log('reached get artist collab function');
     const { artistCounts } = this.state;
-    console.log(artistCounts);
-    const artist = Object.keys(artistCounts).map(function(key) {
-      return (
-        <div>{artistCounts[key]}</div>
-      );
+    // console.log(artistCounts);
+    const artist = Object.keys(artistCounts).map((key) => {
+       //kate
+      const i = document.createElement("div");
+      i.innerHTML = key;
+      i.addEventListener('click', () => {
+        this.searchForArtist(key);
+      })
+      document.getElementById("collabs").appendChild(i);
     });
+  }
+  //kate
+  renderArtists() {
+    console.log("inside render artists");
+    const artists = this.getArtistCollabs();
+    console.log(artists);
   }
 
   render() {
@@ -108,7 +119,11 @@ export default class App extends React.Component {
           <input type='text' name='searchInput' className="searchInput" placeholder="Artist" onChange={this.handleChange} />
           <input type='submit' className="button" />
         </form>
-          <img className="artist-img" src={this.state.selectedArtist.img_url} onClick={this.getArtistCollabs.artistCounts} alt="" />
+          <img className="artist-img" src={this.state.selectedArtist.img_url}
+          // kate
+           onClick={this.renderArtists} alt="" />
+          <div id="collabs">
+          </div>
       </div>
 
     );
