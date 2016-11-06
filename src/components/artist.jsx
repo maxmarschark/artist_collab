@@ -24,11 +24,11 @@ export default class Artist extends React.Component {
     return (
       <div>
         <div onClick={this.props.artistOnClick}>
-        <h1 className="artist-list animated rubberBand">{ this.props.name }</h1>
+          <h1 className="artist-list animated rubberBand">{ this.props.name }</h1>
         <div onClick={this.handleArtistImg}>
         </div>
         </div>
-        <div onClick={this.handleArtistImg}></div>
+        <div onClick={this.handleArtistImg} />
       </div>
     )
   }
