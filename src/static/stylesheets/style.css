@@ -28,11 +28,10 @@ body {
 }
 
 .artist-img {
-  width: 100px;
-	height: 100px;
-  border-radius: 50px;
+  width: 200px;
+	height: 200px;
+  border-radius: 100px;
   margin-left: 40%;
-  margin-top: 25%;
 }
 
 #visualization {
@@ -40,3 +39,11 @@ body {
   width: 98%;
   height: 550px;
 }
+
+/*.h1 {
+  width: 100px;
+	height: 100px;
+  border-radius: 50px;
+  margin-left: 40%;
+  margin-top: 25%;
+}*/

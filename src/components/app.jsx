@@ -1,6 +1,7 @@
 import React from 'react';
 import request from 'superagent';
-import Artist from './getArtistCollabs.jsx';
+import _ from 'lodash';
+import Artist from './artist.jsx';
 
 
 export default class App extends React.Component {
@@ -18,7 +19,8 @@ export default class App extends React.Component {
     this.getArtistAlbums = this.getArtistAlbums.bind(this);
     this.getArtistAlbumTracks = this.getArtistAlbumTracks.bind(this);
     this.getTrackDetails = this.getTrackDetails.bind(this);
-    this.artistOnClick = this.artistOnClick.bind(this)
+    this.getSubsequentCollabs = this.getSubsequentCollabs.bind(this);
+    this.artistOnClick = this.artistOnClick.bind(this);
   }
 
   handleChange(e) {
@@ -63,6 +65,8 @@ export default class App extends React.Component {
           else {
             artistCounts[artistName] = 1;
           }
+          // take local variable artistCounts, run lodash sort then slice first 5 from that into new Object
+          // the set state below should use the new variable with only those first 5 objects
         }
         this.setState({ artistCounts });
       });
@@ -74,7 +78,7 @@ export default class App extends React.Component {
         const artist = response.body.artists.items[0];
         const name = artist.name;
         const id = artist.id;
-        const img_url = artist.images[0].url;
+        let img_url = artist.images[0].url;
         this.setState({
           selectedArtist: {
             name,
@@ -87,21 +91,20 @@ export default class App extends React.Component {
         this.getArtistAlbums();
       })
       .catch((err) => {
-        console.error(err);
       });
   }
 
   getSubsequentCollabs(artist) {
-    this.setState({
-      selectedArtist: {},
-      selectedAlbums: {},
-      artistCounts: {},
-    });
-    this.searchForArtist(artist);
-  }
+   this.setState({
+     selectedArtist: {},
+     selectedAlbums: {},
+     artistCounts: {},
+   });
+   this.searchForArtist(artist);
+ }
 
   artistOnClick(e) {
-    let artist = e.target.value;
+    let artist = e.target.innerHTML;
     this.getSubsequentCollabs(artist);
   }
 
@@ -111,24 +114,24 @@ export default class App extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type='text' name='searchInput' className="searchInput" placeholder="Artist" onChange={this.handleChange} />
-          <input type='submit' className="button" />
+          <input type='text' name="searchInput" className="searchInput" placeholder="Search Artist" onChange={this.handleChange} />
+          <input type="submit" className="button" />
         </form>
-          <img className="artist-img" src={this.state.selectedArtist.img_url} />
-          <div id="collabs">
-            {
+        <img alt="" className="artist-img" src={this.state.selectedArtist.img_url} />
+        <div id="collabs">
+          {
               Object.keys(artistCounts).map((artist) => {
                 return (
                   <Artist
                     name={artist}
+                    image={img_url}
                     artistOnClick={this.artistOnClick}
                   />
                 )
               })
-            }
-          </div>
+          }
+        </div>
       </div>
-
     );
   }
 }
