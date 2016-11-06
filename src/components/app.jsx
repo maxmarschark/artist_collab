@@ -119,15 +119,15 @@ export default class App extends React.Component {
         <img alt="" className="artist-img" src={this.state.selectedArtist.img_url} />
         <div id="collabs">
           {
-              Object.keys(artistCounts).map((artist) => {
-                return (
-                  <Artist
-                    name={artist}
-                    image={img_url}
-                    artistOnClick={this.artistOnClick}
-                  />
-                )
-              })
+            Object.keys(artistCounts).map( (artist, index) => {
+              return (
+                <Artist
+                  name={artist}
+                  artistOnClick={this.artistOnClick}
+                  key={index}
+                />
+              )
+            })
           }
         </div>
       </div>

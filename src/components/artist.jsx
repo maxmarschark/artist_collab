@@ -8,13 +8,9 @@ const propTypes = {
 
 //artistOnClick undefined...figure out how to render collab img
 
-export default class Artist extends React.Component ({name, image, artistOnClick}) {
+export default class Artist extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.image);
-
-    const artistOnClick = this.artistOnClick;
-    const imgage = this.img_url;
     this.handleArtistImg = this.handleArtistImg.bind(this);
   }
 
@@ -27,12 +23,13 @@ export default class Artist extends React.Component ({name, image, artistOnClick
   }
 
   render() {
+
     return (
       <div>
-        <div onClick={artistOnClick}>
-        <h1>{name}</h1>
+        <div onClick={this.props.artistOnClick}>
+        <h1>{ this.props.name }</h1>
         <div onClick={this.handleArtistImg}>
-          <img src={img_url} />
+          <img src={this.props.image} />
         </div>
         </div>
         <div onClick={this.handleArtistImg}></div>
