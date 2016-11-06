@@ -114,8 +114,9 @@ export default class App extends React.Component {
       <div>
         <div className="header">
           <h1 className="top-text">Artist Collaborator</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input type='text' name="searchInput" className="searchInput" placeholder="Search Artist" onChange={this.handleChange} />
+
+          <form onSubmit={this.handleSubmit}>
+            <input type='text' name="searchInput" className="searchInput" placeholder="Search Artist" onChange={this.handleChange} />
           <input type="submit" className="button" />
         </form>
         </div>
