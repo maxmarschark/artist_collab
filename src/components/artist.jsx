@@ -5,9 +5,6 @@ const propTypes = {
   artistOnClick: React.PropTypes.func.isRequired,
 };
 
-
-//artistOnClick undefined...figure out how to render collab img
-
 export default class Artist extends React.Component {
   constructor(props) {
     super(props);
@@ -27,9 +24,8 @@ export default class Artist extends React.Component {
     return (
       <div>
         <div onClick={this.props.artistOnClick}>
-        <h1>{ this.props.name }</h1>
+        <h1 className="artist-list animated rubberBand">{ this.props.name }</h1>
         <div onClick={this.handleArtistImg}>
-          <img src={this.props.image} />
         </div>
         </div>
         <div onClick={this.handleArtistImg}></div>
@@ -39,36 +35,3 @@ export default class Artist extends React.Component {
 }
 
 Artist.propTypes = propTypes;
-
-// class Artist extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       image: {},
-//     };
-//
-
-
-// export default class Artist extends React.Component {
-//   constructor(props) {
-//     super();
-//     this.state = {
-//       image: {}
-//     }
-//   }
-
-
-//
-//   render() {
-
-//     const name = this.name;
-//     return (
-//       <div>
-//       <img className="artist-img" src={this.state.image.img_url} />
-//         <div name={name} img={image} onClick={artistOnClick}>
-//           {name, image}
-//         </div>
-//       </div>
-//     )
-//   }
-// }

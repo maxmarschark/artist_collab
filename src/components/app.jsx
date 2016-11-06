@@ -22,19 +22,6 @@ export default class App extends React.Component {
     this.artistOnClick = this.artistOnClick.bind(this);
   }
 
-  handleChange(e) {
-    e.preventDefault();
-    this.setState({
-      searchInput: e.target.value,
-    });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    const query = this.state.searchInput.replace(' ', '%20');
-    this.searchForArtist(query);
-  }
-
   getArtistAlbums() {
     const { id } = this.state.selectedArtist;
     request.get(`https://api.spotify.com/v1/artists/${id}/albums`)
@@ -64,8 +51,8 @@ export default class App extends React.Component {
           else {
             artistCounts[artistName] = 1;
           }
-          // take local variable artistCounts, run lodash sort then slice first 5 from that into new Object
-          // the set state below should use the new variable with only those first 5 objects
+// take local variable artistCounts, run lodash sort then slice first 5 from that into new Object
+// the set state below should use the new variable with only those first 5 objects
         }
         this.setState({ artistCounts });
       });
@@ -100,7 +87,20 @@ export default class App extends React.Component {
      artistCounts: {},
    });
    this.searchForArtist(artist);
- }
+  }
+
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({
+      searchInput: e.target.value,
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const query = this.state.searchInput.replace(' ', '%20');
+    this.searchForArtist(query);
+  }
 
   artistOnClick(e) {
     let artist = e.target.innerHTML;
@@ -112,21 +112,24 @@ export default class App extends React.Component {
     const { artistCounts } = this.state;
     return (
       <div>
+        <div className="header">
+          <h1 className="top-text">Artist Collaborator</h1>
         <form onSubmit={this.handleSubmit}>
           <input type='text' name="searchInput" className="searchInput" placeholder="Search Artist" onChange={this.handleChange} />
           <input type="submit" className="button" />
         </form>
+        </div>
         <img alt="" className="artist-img" src={this.state.selectedArtist.img_url} />
         <div id="collabs">
           {
-            Object.keys(artistCounts).map( (artist, index) => {
+            Object.keys(artistCounts).map((artist, index) => {
               return (
                 <Artist
                   name={artist}
                   artistOnClick={this.artistOnClick}
                   key={index}
                 />
-              )
+              );
             })
           }
         </div>
