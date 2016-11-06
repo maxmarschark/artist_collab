@@ -5,23 +5,24 @@ const propTypes = {
   artistOnClick: React.PropTypes.func.isRequired,
 };
 
-const artistOnClick = this.artistOnClick;
-const img_url = this.state.img_url;
 
+//artistOnClick undefined...figure out how to render collab img
 
-export default class Artist extends React.Component ({name, artistOnClick, img_url}) {
+export default class Artist extends React.Component ({name, image, artistOnClick}) {
   constructor(props) {
     super(props);
+    console.log(this.image);
+
+    const artistOnClick = this.artistOnClick;
+    const imgage = this.img_url;
     this.handleArtistImg = this.handleArtistImg.bind(this);
   }
 
-
-
-  handleArtistImg(id) {
+  handleArtistImg(event, id) {
     request.get(`https://api.spotify.com/v1/search?q=${id}&type=artist`)
     .then((response) => {
       const artist = response.body.artists.items[0].images[0].url;
-      let img_url = artist.images[0].url;
+      let img_url = artist;
     })
   }
 

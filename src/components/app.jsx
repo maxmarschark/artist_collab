@@ -1,6 +1,5 @@
 import React from 'react';
 import request from 'superagent';
-import _ from 'lodash';
 import Artist from './artist.jsx';
 
 
