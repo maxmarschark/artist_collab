@@ -118,7 +118,7 @@ export default class App extends React.Component {
     return (
       <div>
         <div className="header">
-          <h1 className="top-text animated rubberBand">Artist Collaborator</h1>
+          <h1 className="top-text animated rubberBand">.FEATURING.</h1>
 
           <form onSubmit={this.handleSubmit}>
             <input id='searchInput' type='text' name="searchInput" className="searchInput" placeholder="Search Artist" onChange={this.handleChange} />
