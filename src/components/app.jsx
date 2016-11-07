@@ -18,7 +18,7 @@ export default class App extends React.Component {
     this.getArtistAlbums = this.getArtistAlbums.bind(this);
     this.getArtistAlbumTracks = this.getArtistAlbumTracks.bind(this);
     this.getTrackDetails = this.getTrackDetails.bind(this);
-    this.getSubsequentCollabs = this.getSubsequentCollabs.bind(this);
+    this.getNextCollabs = this.getNextCollabs.bind(this);
     this.artistOnClick = this.artistOnClick.bind(this);
   }
 
@@ -80,7 +80,7 @@ export default class App extends React.Component {
       });
   }
 
-  getSubsequentCollabs(artist) {
+  getNextCollabs(artist) {
    this.setState({
      selectedArtist: {},
      selectedAlbums: {},
@@ -90,7 +90,6 @@ export default class App extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault();
     this.setState({
       searchInput: e.target.value,
     });
@@ -109,7 +108,8 @@ export default class App extends React.Component {
 
   artistOnClick(e) {
     let artist = e.target.innerHTML;
-    this.getSubsequentCollabs(artist);
+    this.getNextCollabs(artist);
+    document.getElementById("searchInput").value = artist;
   }
 
   render() {
@@ -121,7 +121,7 @@ export default class App extends React.Component {
           <h1 className="top-text animated rubberBand">Artist Collaborator</h1>
 
           <form onSubmit={this.handleSubmit}>
-            <input type='text' name="searchInput" className="searchInput" placeholder="Search Artist" onChange={this.handleChange} />
+            <input id='searchInput' type='text' name="searchInput" className="searchInput" placeholder="Search Artist" onChange={this.handleChange} />
           <input type="submit" className="button" />
         </form>
         </div>
