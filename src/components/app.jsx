@@ -100,6 +100,11 @@ export default class App extends React.Component {
     e.preventDefault();
     const query = this.state.searchInput.replace(' ', '%20');
     this.searchForArtist(query);
+    this.setState({
+      selectedArtist: {},
+      selectedAlbums: {},
+      artistCounts: {},
+    });
   }
 
   artistOnClick(e) {
