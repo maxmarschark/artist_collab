@@ -7,6 +7,8 @@ const wpHotMiddleWare = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
 const app = require('./app/app.js');
 
+let port = 80;
+
 if (process.env.ENV === 'dev') {
   const compiler = webpack(config);
   const midWare = wpMiddleWare(compiler, {
@@ -17,12 +19,14 @@ if (process.env.ENV === 'dev') {
   });
   app.use(midWare);
   app.use(wpHotMiddleWare(compiler));
+  port = 3000;
 }
+
 app.use(express.static(path.join(__dirname, '/src/static')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/src/static/index.html'));
 });
-const port = 3000;
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
