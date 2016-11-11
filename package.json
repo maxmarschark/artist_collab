@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --hot --progress --colors",
     "start:dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "ENV=production node server.js"
   },
   "author": "",
   "license": "ISC",

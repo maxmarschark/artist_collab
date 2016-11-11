@@ -6,6 +6,7 @@ const wpMiddleWare = require('webpack-dev-middleware');
 const wpHotMiddleWare = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
 const app = require('./app/app.js');
+
 if (process.env.ENV === 'dev') {
   const compiler = webpack(config);
   const midWare = wpMiddleWare(compiler, {
