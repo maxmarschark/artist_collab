@@ -1,3 +1,5 @@
+'use strict';
+
 process.env.ENV = process.env.ENV || 'dev';
 const path = require('path');
 const express = require('express');
